@@ -1,0 +1,41 @@
+type Query {
+  listQuotes(filter: Int): [Quote!]!
+  listFoundingFathers: [FoundingFather!]!
+  quote(id: ID!): Quote
+}
+
+type Mutation {
+  createQuote(content: String!, year: Int!, foundingFatherID: Int!, url: String!, classPeriod: Int!): Quote!
+  createFoundingFather(name: String!, description: String): FoundingFather!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Quote {
+  id: ID!
+  content: String!
+  year: Int!
+  foundingFather: FoundingFather
+  url: String!
+  classPeriod: Int!
+  postedBy: User
+}
+
+type FoundingFather {
+  id: ID!
+  name: String!
+  description: String!
+  quotes: [Quote!]!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  quotes: [Quote!]!
+}
